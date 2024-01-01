@@ -21,12 +21,11 @@ interface NavItem {
 }
 
 export default function Navbar() {
-  //主题设置
+  
   const { setTheme } = useTheme();
   const [config, setConfig] = useConfig();
   useEffect(() => setTheme("dark"));
 
-  //路由
   const router = useRouter();
   const pathname = usePathname();
   const navigation: NavItem[] = [
@@ -106,7 +105,6 @@ export default function Navbar() {
                         const theme = themes.find(
                           (theme) => theme.name === color
                         );
-                        const isActive = config.theme === color;
                         if (!theme) {
                           return null;
                         }

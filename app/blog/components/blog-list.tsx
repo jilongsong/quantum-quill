@@ -1,7 +1,7 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState, Suspense } from "react";
 import { marked } from "marked";
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Skeleton from "@/components/skeleton";
@@ -48,13 +48,7 @@ const BlogItem = ({ blog }: { blog: blogItem }) => {
 
             {blog.images.length > 0 ? (
               <div className="ml-2">
-                <Image
-                  src={blog.images[0]}
-                  alt="图片"
-                  width={3000}
-                  height={300}
-                  style={{ borderRadius: "6px" }}
-                />
+                <img style={{ borderRadius: "6px", width:'3000px' }} src={blog.images[0]} alt="" />
               </div>
             ) : null}
           </div>
