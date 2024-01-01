@@ -1,0 +1,23 @@
+@keyframes spin { 
+    100% { 
+      transform: rotate(360deg); 
+    } 
+  } 
+
+.loading-container {
+   display: flex;
+   justify-content: center;
+    box-sizing: border-box;
+    margin-top: 20%;
+    padding: 30px;
+  }
+
+  .loading-circle {
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #FFF;
+    animation: spin 1s infinite linear;
+  }
