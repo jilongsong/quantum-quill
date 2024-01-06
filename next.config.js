@@ -1,10 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  distDir: 'dist',
-    images: {
-        domains: ['songjilong-1312734502.cos.ap-shanghai.myqcloud.com'],
-      },
+  images: {
+      domains: ['songjilong-1312734502.cos.ap-shanghai.myqcloud.com'],
+    },
+    async redirects() {
+      return [
+        {
+          source: '/',
+          destination: '/dashboard',
+          permanent: true, // 设为 true 表示永久重定向，设为 false 表示临时重定向
+        },
+      ];
+    },
 }
 
 module.exports = nextConfig
