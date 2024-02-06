@@ -99,7 +99,6 @@ export default function Navbar() {
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Themes" />
                   </SelectTrigger>
-                  <SelectContent>
                     {["zinc", "rose", "blue", "green", "orange"].map(
                       (color) => {
                         const theme = themes.find(
@@ -109,15 +108,14 @@ export default function Navbar() {
                           return null;
                         }
                         return (
-                          <>
-                            <SelectItem key={theme.name} value={color}>
+                          <SelectContent key={theme.name}>
+                            <SelectItem value={color}>
                               {color}
                             </SelectItem>
-                          </>
+                            </SelectContent>
                         );
                       }
                     )}
-                  </SelectContent>
                 </Select>
               </div>
             </div>

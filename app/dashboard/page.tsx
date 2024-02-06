@@ -1,8 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-// import "../../public/assets/css/iconoir.css";
-// import "../../public/assets/css/bootstrap.min.css";
-// import "../../public/assets/css/aos.css";
-// import "../../public/assets/css/style.css";
 import {
   Card,
   CardContent,
