@@ -16,7 +16,7 @@ export default function Page() {
     <div className="min-h-full mt-4">
       <div className="mx-auto max-w-7xl px-6 sm:px-2">
         <ResizablePanelGroup direction="horizontal">
-          <ResizablePanel defaultSize={25}>
+          <ResizablePanel defaultSize={20}>
             <CommandMenus
               selectType={(type: string) => setArticleType(type)}
             ></CommandMenus>

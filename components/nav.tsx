@@ -21,7 +21,6 @@ interface NavItem {
 }
 
 export default function Navbar() {
-  
   const { setTheme } = useTheme();
   const [config, setConfig] = useConfig();
   useEffect(() => setTheme("dark"));
@@ -99,23 +98,17 @@ export default function Navbar() {
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Themes" />
                   </SelectTrigger>
-                    {["zinc", "rose", "blue", "green", "orange"].map(
-                      (color) => {
-                        const theme = themes.find(
-                          (theme) => theme.name === color
-                        );
-                        if (!theme) {
-                          return null;
-                        }
-                        return (
-                          <SelectContent key={theme.name}>
-                            <SelectItem value={color}>
-                              {color}
-                            </SelectItem>
-                            </SelectContent>
-                        );
-                      }
-                    )}
+                  <SelectContent>
+                  {["zinc", "rose", "blue", "green", "orange"].map((color) => {
+                    const theme = themes.find((theme) => theme.name === color);
+                    if (!theme) {
+                      return null;
+                    }
+                    return (
+                        <SelectItem value={color} key={theme.name}>{color}</SelectItem>
+                    );
+                  })}
+                      </SelectContent>
                 </Select>
               </div>
             </div>
