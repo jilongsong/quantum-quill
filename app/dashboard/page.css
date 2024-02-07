@@ -1,0 +1,10 @@
+.card-container {
+    --card-rotate-x: 0;
+    --card-rotate-y: 0;
+    perspective: 1000px; /* 添加透视效果 */
+  }
+  
+  .card {
+    transform: rotateX(var(--card-rotate-x)) rotateY(var(--card-rotate-y));
+    transition: transform 0.3s ease-in-out;
+  }
