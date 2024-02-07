@@ -3,7 +3,7 @@ import { ApiManager, IaxiosRequestConfig } from '@/utils/request';
 import { FetchUserInfoReq, FetchUserInfoRes } from './type';
 
 const baseConfig = <IaxiosRequestConfig>{
-  baseURL: 'http://124.222.192.103:3000',
+  baseURL: 'https://124.222.192.103:3000',
   timeout: 10000,
 };
 
