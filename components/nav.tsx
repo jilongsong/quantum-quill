@@ -30,9 +30,9 @@ export default function Navbar() {
   const navigation: NavItem[] = [
     { name: "Dashboard", href: "/dashboard", current: true },
     { name: "Blog", href: "/blog", current: false },
-    { name: "Projects", href: "#", current: false },
-    { name: "Collection", href: "#", current: false },
-    { name: "About", href: "#", current: false },
+    { name: "Projects", href: "/projects", current: false },
+    { name: "Collection", href: "/collection", current: false },
+    { name: "About", href: "/about", current: false },
   ];
 
   const classNames = (...classes: string[]) => {

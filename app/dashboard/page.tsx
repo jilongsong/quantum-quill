@@ -23,7 +23,7 @@ export default function Page() {
             <Signature></Signature>
           </CardContent>
         </Card>
-        <Card className="row-span-1 col-span-2">
+        <Card className="row-span-1 col-span-2 flex items-center">
           <CardContent>
             <UserInfo></UserInfo>
           </CardContent>
