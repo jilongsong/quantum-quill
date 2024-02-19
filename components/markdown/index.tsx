@@ -5,7 +5,7 @@ import { Terminal } from "lucide-react";
 import "highlight.js/styles/atom-one-dark.css";
 import CopyCode from "./copyCode";
 
-const Markdown = ({ content }: { content: string }) => {
+const Markdown = ({ content }: { content: string | null | undefined }) => {
   return (
     <ReactMarkdown
       rehypePlugins={[rehypeHighlight]}

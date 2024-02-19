@@ -39,7 +39,7 @@ export const hotKey2Array = (keys: (string | string[])[] = []): (string | undefi
 };
 
 export function getURLParameter(parameterName: string) {
-  const url = window.location.href;
+  const url = globalThis.location.href;
 
   // 获取问号后面的部分，即查询字符串
   const queryString = url.split('?')[1];

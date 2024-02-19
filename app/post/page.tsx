@@ -66,7 +66,7 @@ export default function Page() {
                     <FormItem>
                       <FormLabel>Article Title</FormLabel>
                       <FormControl>
-                        <Input placeholder="shadcn" {...field} />
+                        <Input placeholder="plese input title" {...field} />
                       </FormControl>
                       <FormDescription></FormDescription>
                       <FormMessage />
@@ -116,7 +116,7 @@ export default function Page() {
                       <FormLabel>Article Content</FormLabel>
                       <FormControl>
                       <div style={{ height: "calc(100vh - 300px)" }} className=" grid grid-cols-2 gap-4">
-                      <Textarea className="h-full overflow-y-auto" placeholder="Type your message here." {...field} />
+                      <Textarea className="h-full overflow-y-auto" placeholder="write your content here." {...field} />
                       <div className="h-full overflow-y-auto">
                       <Markdown content={field.value} />
                       </div>

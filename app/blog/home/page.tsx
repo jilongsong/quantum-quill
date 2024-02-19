@@ -5,9 +5,9 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import CommandMenus from "./components/command-menu";
-import BlogList from "./components/blog-list";
-import PostNav from "./components/post-nav";
+import CommandMenus from "../components/command-menu";
+import BlogList from "../components/blog-list";
+import PostNav from "../components/post-nav";
 
 export default function Page() {
   const [articleType, setArticleType] = useState<string>("");

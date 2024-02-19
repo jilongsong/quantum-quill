@@ -29,7 +29,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const navigation: NavItem[] = [
     { name: "Dashboard", href: "/dashboard", current: true },
-    { name: "Blog", href: "/blog", current: false },
+    { name: "Blog", href: "/blog/home", current: false },
     { name: "Projects", href: "/projects", current: false },
     { name: "Collection", href: "/collection", current: false },
     { name: "About", href: "/about", current: false },

@@ -9,8 +9,18 @@ import { cn } from "@/lib/utils";
 import { fetchPostList } from "@/api/posts/index";
 import { blogItem } from "@/api/posts/type";
 import Nodata from "@/components/nodata";
+import { useRouter } from "next/navigation";
+
+
 
 const BlogItem = ({ blog }: { blog: blogItem }) => {
+
+  const router = useRouter();
+
+  const viewBlogDetail = (id: string) => () => {
+    router.push(`/blog/detail?blogId=${id}`);
+  };
+
   return (
     <>
       <div className="flex flex-col gap-2 p-4 pt-0">
@@ -23,7 +33,7 @@ const BlogItem = ({ blog }: { blog: blogItem }) => {
           <div className="flex w-full flex-col gap-1">
             <div className="flex items-center">
               <div className="flex items-center gap-2">
-                <div className="font-semibold">{blog.title}</div>
+                <div className="font-semibold" onClick={viewBlogDetail(blog.blogId)}>{blog.title}</div>
                 {false && (
                   <span className="flex h-2 w-2 rounded-full bg-blue-600" />
                 )}
@@ -82,7 +92,7 @@ export default function MailList({ articleType }: { articleType: string }) {
       setLoading(true);
       const result = await fetchPostList({
         limit: 1,
-        size: 5,
+        size: 10,
         type: articleType || "",
       });
       result.blogList?.forEach((item) => {
@@ -101,8 +111,9 @@ export default function MailList({ articleType }: { articleType: string }) {
     fetchData();
   }, [articleType]);
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ScrollArea className="h-screen mb-[-100px]">
+   <div style={{ height: "calc(100vh - 100px)" }}>
+     <Suspense fallback={<div>Loading...</div>}>
+      <ScrollArea className="h-full">
         {loading ? (
           <>
             <Skeleton></Skeleton>
@@ -118,5 +129,6 @@ export default function MailList({ articleType }: { articleType: string }) {
         </>)}
       </ScrollArea>
     </Suspense>
+   </div>
   );
 }
