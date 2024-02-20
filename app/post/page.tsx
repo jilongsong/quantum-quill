@@ -2,10 +2,13 @@
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Markdown from "@/components/markdown/index";
 import * as z from "zod";
+
+import RouteDialog from "./components/routerDialog";
+
 import {
   Form,
   FormControl,
@@ -24,7 +27,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { createPost } from '@/api/posts'
+import { createPost } from "@/api/posts";
+import { useState } from "react";
 
 const formSchema = z.object({
   title: z.string().min(1, {
@@ -39,17 +43,22 @@ const formSchema = z.object({
 });
 
 export default function Page() {
+  const [open, setOpen] = useState(false);
+  const [blogId, setBlogId] = useState("");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
       type: "javascript",
-      content: '',
+      content: "",
     },
   });
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const result = await createPost(values);
-      result && form.reset();
+    result && form.reset();
+    setBlogId(result?.blogId);
+    setOpen(true);
   };
 
   return (
@@ -92,7 +101,9 @@ export default function Page() {
                           <SelectContent position="popper" {...field}>
                             <SelectItem value="html">Html</SelectItem>
                             <SelectItem value="css">Css</SelectItem>
-                            <SelectItem value="javascript">Javascript</SelectItem>
+                            <SelectItem value="javascript">
+                              Javascript
+                            </SelectItem>
                             <SelectItem value="vue">Vue</SelectItem>
                             <SelectItem value="react">React</SelectItem>
                           </SelectContent>
@@ -109,26 +120,40 @@ export default function Page() {
               </div>
             </div>
             <FormField
-                  control={form.control}
-                  name="content"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Article Content</FormLabel>
-                      <FormControl>
-                      <div style={{ height: "calc(100vh - 300px)" }} className=" grid grid-cols-2 gap-4">
-                      <Textarea className="h-full overflow-y-auto" placeholder="write your content here." {...field} />
+              control={form.control}
+              name="content"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Article Content</FormLabel>
+                  <FormControl>
+                    <div
+                      style={{ height: "calc(100vh - 300px)" }}
+                      className=" grid grid-cols-2 gap-4"
+                    >
+                      <Textarea
+                        className="h-full overflow-y-auto"
+                        placeholder="write your content here."
+                        {...field}
+                      />
                       <div className="h-full overflow-y-auto">
-                      <Markdown content={field.value} />
+                        <Markdown content={field.value} />
                       </div>
-                      </div>
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    </div>
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </form>
         </Form>
+        <RouteDialog
+          open={open}
+          id={blogId}
+          setOpen={(flag: boolean | ((prevState: boolean) => boolean)) =>
+            setOpen(flag)
+          }
+        ></RouteDialog>
       </div>
     </div>
   );

@@ -45,15 +45,6 @@ const BlogItem = ({ blog }: { blog: blogItem }) => {
               <div className="line-clamp-2 my-2 overflow-hidden text-xs text-muted-foreground">
                 {blog.content}
               </div>
-              <div
-                className={cn(
-                  "flex items-center justify-between ml-auto text-xs mt-2",
-                  false ? "text-foreground" : "text-muted-foreground"
-                )}
-              >
-                <Badge>{blog.type}</Badge>
-                <span className="mr-10">{blog.publicationDate}</span>
-              </div>
             </div>
 
             {blog.images.length > 0 ? (
@@ -62,6 +53,15 @@ const BlogItem = ({ blog }: { blog: blogItem }) => {
               </div>
             ) : null}
           </div>
+          <div
+                className={cn(
+                  "flex items-center w-full justify-between ml-auto text-xs",
+                  false ? "text-foreground" : "text-muted-foreground"
+                )}
+              >
+                <Badge>{blog.type}</Badge>
+                <span>{blog.publicationDate}</span>
+              </div>
         </div>
       </div>
     </>
