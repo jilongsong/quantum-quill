@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense, useRef } from "react";
 import { marked } from "marked";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -84,14 +84,19 @@ const translateHtmlToText = (html: string) => {
 };
 
 export default function MailList({ articleType }: { articleType: string }) {
+  
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [blogList, setBlogList] = useState<blogItem[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
-  const fetchData = async () => {
+
+  const fetchData = async (page: number) => {
     try {
       setLoading(true);
       const result = await fetchPostList({
-        limit: 1,
+        limit: page,
         size: 10,
         type: articleType || "",
       });
@@ -100,20 +105,44 @@ export default function MailList({ articleType }: { articleType: string }) {
         item.images = extractImageSrc(item.content);
         item.content = translateHtmlToText(item.content);
       });
-      setBlogList(result.blogList);
+      setBlogList((prevList) => [...prevList, ...(result.blogList ?? [])]);
       setTotal(result.total);
     } catch (error) {
     } finally {
       setLoading(false);
     }
   };
+
   useEffect(() => {
-    fetchData();
-  }, [articleType]);
+    fetchData(currentPage);
+  }, [articleType, currentPage]);
+
+
+  const handleScroll = () => {
+    if (
+      scrollAreaRef.current &&
+      scrollAreaRef.current.scrollHeight - scrollAreaRef.current.scrollTop ===
+        scrollAreaRef.current.clientHeight
+    ) {
+      // 判断是否滚动到底部，如果已到底部，则加载下一页数据
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    console.log('xxxxxxxxxxxx', scrollAreaRef)
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.addEventListener("scroll", handleScroll);
+      return () => {
+        scrollAreaRef.current?.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [scrollAreaRef]);
+
   return (
    <div style={{ height: "calc(100vh - 100px)" }}>
      <Suspense fallback={<div>Loading...</div>}>
-      <ScrollArea className="h-full">
+      <ScrollArea className="h-full" ref={scrollAreaRef}>
         {loading ? (
           <>
             <Skeleton></Skeleton>

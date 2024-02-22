@@ -57,7 +57,7 @@ export default function Page() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const result = await createPost(values);
     result && form.reset();
-    setBlogId(result?.blogId);
+    setBlogId(result.blogId);
     setOpen(true);
   };
 
@@ -130,11 +130,14 @@ export default function Page() {
                       style={{ height: "calc(100vh - 300px)" }}
                       className=" grid grid-cols-2 gap-4"
                     >
-                      <Textarea
-                        className="h-full overflow-y-auto"
-                        placeholder="write your content here."
-                        {...field}
-                      />
+                      <div>
+                        <div>上传</div>
+                        <Textarea
+                          className="h-full overflow-y-auto"
+                          placeholder="write your content here."
+                          {...field}
+                        />
+                      </div>
                       <div className="h-full overflow-y-auto">
                         <Markdown content={field.value} />
                       </div>
