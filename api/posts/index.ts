@@ -12,7 +12,7 @@ import {
 } from './type';
 
 const baseConfig = <IaxiosRequestConfig>{
-  baseURL: 'http://songjilong.xyz',
+  baseURL: 'http://124.222.192.103:3000',
   timeout: 10000,
 };
 
