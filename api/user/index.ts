@@ -7,9 +7,11 @@ const baseConfig = <IaxiosRequestConfig>{
   timeout: 10000,
 };
 
+const PROXY_PREFIX = '/backend'
+
 const Api = new ApiManager(baseConfig);
 
 export const getUserInfo = async (data: FetchUserInfoReq): Promise<FetchUserInfoRes> => {
-  const { result } = await Api.get(`/personal-info/user/${data.userId}`);
+  const { result } = await Api.get(`${PROXY_PREFIX}/personal-info/user/${data.userId}`);
   return result;
 };
