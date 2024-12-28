@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
-import { buildQueryString } from '@/utils/index';
 export * from 'axios';
 
 export const enum ContentType {
@@ -14,7 +13,15 @@ export const enum ContentType {
   FORM_DATA = 'multipart/form-data;charset=UTF-8',
 }
 
-export interface IaxiosRequestConfig extends AxiosRequestConfig {
+export const buildQueryString = (baseUrl: string, params: Record<string, any>) => {
+  const queryString = Object.entries(params)
+    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+    .join('&');
+
+  return `${baseUrl}?${queryString}`;
+};
+
+export interface IAxiosRequestConfig extends AxiosRequestConfig {
   retryDelay?: number;
   retryCount?: number;
   baseURL?: string;
@@ -22,12 +29,12 @@ export interface IaxiosRequestConfig extends AxiosRequestConfig {
 }
 
 export class ApiManager {
-  private axiosInstance: AxiosInstance;
+  private readonly axiosInstance: AxiosInstance;
 
-  constructor(config: IaxiosRequestConfig = {}) {
+  constructor(config: IAxiosRequestConfig = {}) {
     this.axiosInstance = axios.create({
-      baseURL: config.baseURL || 'https://api.example.com',
-      timeout: config.timeout || 10000,
+      baseURL: config.baseURL ?? 'https://api.example.com',
+      timeout: config.timeout ?? 10000,
     });
 
     this.setupInterceptors();
@@ -56,8 +63,8 @@ export class ApiManager {
     );
   }
 
-  public async request(config: IaxiosRequestConfig) {
-    let retries = config.retryCount || 3;
+  public async request(config: IAxiosRequestConfig) {
+    let retries = config.retryCount ?? 3;
     while (retries > 0) {
       try {
         const response = await this.axiosInstance(config);
@@ -67,7 +74,7 @@ export class ApiManager {
           // 最后一次重试仍然失败，抛出错误
           throw error;
         }
-        await new Promise((resolve) => setTimeout(resolve, config.retryDelay || 3000));
+        await new Promise((resolve) => setTimeout(resolve, config.retryDelay ?? 3000));
         retries--;
       }
     }
@@ -98,5 +105,5 @@ export class ApiManager {
     });
   }
 
-  // 添加其他 HTTP 方法如 put, delete, 等
+  // 添加其他 HTTP 方法如 put 等
 }

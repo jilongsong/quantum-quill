@@ -27,7 +27,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { createPost } from "@/api/posts";
+import { createPost } from "@/api/songs";
 import { useState } from "react";
 
 const formSchema = z.object({

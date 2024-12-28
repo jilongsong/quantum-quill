@@ -6,8 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Skeleton from "@/components/skeleton";
 import { cn } from "@/lib/utils";
-import { fetchPostList } from "@/api/posts/index";
-import { blogItem } from "@/api/posts/type";
+import { fetchPostList } from "@/api/songs/index";
+import { blogItem } from "@/api/songs/type";
 import Nodata from "@/components/nodata";
 import { useRouter } from "next/navigation";
 

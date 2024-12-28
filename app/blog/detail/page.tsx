@@ -4,8 +4,8 @@ import Markdown from "@/components/markdown/index";
 import ScrollTop from "@/components/scrollTop";
 import './page.css'
 import { getURLParameter } from "@/utils";
-import { fetchPostDetail } from "@/api/posts";
-import { FetchBlogDetailRes } from "@/api/posts/type";
+import { fetchPostDetail } from "@/api/songs";
+import { FetchBlogDetailRes } from "@/api/songs/type";
 
 export default function Page() {
  
